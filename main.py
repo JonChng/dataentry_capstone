@@ -15,5 +15,25 @@ print(data)
 soup = BeautifulSoup(data.text, 'html.parser')
 
 listings = soup.find_all("li", {"class":"ListItem-c11n-8-85-1__sc-10e22w8-0 srp__sc-wtsrtn-0 jhnswL with_constellation"})
-print(listings)
+to_remove = []
+links = []
+
+for i in listings:
+    a = i.find_next("a", {"class":"property-card-link"})
+
+    try:
+        link = a['href']
+        addition = link.split("/b/")[1]
+        link_url = "https://www.zillow.com/b/" + addition
+        links.append(link_url)
+
+
+    except TypeError:
+        print("No Link.")
+        to_remove.append(i)
+
+listings = [x for x in listings if x not in to_remove]
+
+
+
 
