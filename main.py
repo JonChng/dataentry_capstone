@@ -16,7 +16,11 @@ soup = BeautifulSoup(data.text, 'html.parser')
 
 listings = soup.find_all("li", {"class":"ListItem-c11n-8-85-1__sc-10e22w8-0 srp__sc-wtsrtn-0 jhnswL with_constellation"})
 to_remove = []
+
+#Getting Links and removing listings with no links
 links = []
+prices = []
+
 
 for i in listings:
     a = i.find_next("a", {"class":"property-card-link"})
@@ -33,6 +37,15 @@ for i in listings:
         to_remove.append(i)
 
 listings = [x for x in listings if x not in to_remove]
+
+#Getting Prices
+
+for i in listings:
+    a = i.find_next("span")
+    prices.append(a.text)
+
+
+
 
 
 
