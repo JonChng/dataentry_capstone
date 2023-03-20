@@ -20,6 +20,7 @@ to_remove = []
 #Getting Links and removing listings with no links
 links = []
 prices = []
+addresses =[]
 
 
 for i in listings:
@@ -44,6 +45,9 @@ for i in listings:
     a = i.find_next("span")
     prices.append(a.text)
 
+for i in listings:
+    a = i.find_next("address")
+    addresses.append(a.text)
 
 
 
